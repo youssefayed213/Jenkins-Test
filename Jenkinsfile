@@ -22,8 +22,8 @@ node {
       //sh "'${mvnHome}/bin/mvn' clean install"
     //}
    stage('Build Project') {
-      def mvn_version = 'M3'
-      withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+      mvnHome = 'maven-3.5.2'
+      withEnv( ["PATH+MAVEN=${tool mvnHome}/bin"] ) {
       	sh "mvn clean package"
       }
     }
