@@ -16,18 +16,15 @@ node {
       // ** NOTE: This 'maven-3.5.2' Maven tool must be configured
       // **       in the global configuration.           
       mvnHome = tool 'maven-3.5.2'
-    }    
-    agent any
-     tools {
-       maven 'maven-3.5.2'
-     }
+    }
     //stage('Build Project') {
       // build project via maven
       //sh "'${mvnHome}/bin/mvn' clean install"
     //}
    stage('Build Project') {
-      steps {
-        sh 'mvn -B -DskipTests clean package'
+      def mvn_version = 'M3'
+      withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+      	sh "mvn clean package"
       }
     }
 		
