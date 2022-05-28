@@ -11,26 +11,22 @@ node {
     
     stage('Clone Repo') { // for display purposes
       // Get some code from a GitHub repository
-      git 'https://github.com/rhmanou/Jenkins-Test.git'
+      git 'https://github.com/felipemeriga/DevOps-Example.git'
       // Get the Maven tool.
       // ** NOTE: This 'maven-3.5.2' Maven tool must be configured
       // **       in the global configuration.           
-      //mvnHome = tool 'maven-3.5.2'
-    }
-    //stage('Build Project') {
+      mvnHome = tool 'maven-3.5.2'
+    }    
+  
+    stage('Build Project') {
       // build project via maven
-      //sh "'${mvnHome}/bin/mvn' clean install"
-    //}
-   stage('Build Project') {
-      mvnHome = 'maven-3.5.2'
-      withEnv( ["PATH+MAVEN=${tool mvnHome}/bin"] ) {
-      	sh "mvn clean install"
-      }
+      sh "'${mvnHome}/bin/mvn' clean install"
     }
 		
     stage('Build Docker Image') {
       // build docker image
-      dockerImage = docker.build("devopsexample:${env.BUILD_NUMBER}")
+      //dockerImage = docker.build("devopsexample:${env.BUILD_NUMBER}")
+      sh "docker build -t devopsexample:${env.BUILD_NUMBER}"
     }
    
     stage('Deploy Docker Image'){
@@ -39,9 +35,9 @@ node {
 		
       echo "Docker Image Tag Name: ${dockerImageTag}"
 	  
-	  //sh "docker stop devopsexample"
+	  sh "docker stop devopsexample"
 	  
-	  //sh "docker rm devopsexample"
+	  sh "docker rm devopsexample"
 	  
 	  sh "docker run --name devopsexample -d -p 2222:2222 devopsexample:${env.BUILD_NUMBER}"
 	  
