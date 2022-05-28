@@ -17,10 +17,18 @@ node {
       // **       in the global configuration.           
       mvnHome = tool 'maven-3.5.2'
     }    
-  
-    stage('Build Project') {
+    agent any
+     tools {
+       maven 'maven-3.5.2'
+     }
+    //stage('Build Project') {
       // build project via maven
-      sh "'${mvnHome}/bin/mvn' clean install"
+      //sh "'${mvnHome}/bin/mvn' clean install"
+    //}
+   stage('Build Project') {
+      steps {
+        sh 'mvn -B -DskipTests clean package'
+      }
     }
 		
     stage('Build Docker Image') {
