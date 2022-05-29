@@ -23,6 +23,11 @@ node {
       //sh "'${mvnHome}/bin/mvn' clean install"
       sh "'${mvnHome}/bin/mvn' -B -DskipTests clean package"
     }
+	
+    stage('Initialize Docker'){         
+	    def dockerHome = tool 'myDocker'         
+	    env.PATH = "${dockerHome}/bin:${env.PATH}"     
+    } 
 		
     stage('Build Docker Image') {
       // build docker image
