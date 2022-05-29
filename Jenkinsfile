@@ -32,7 +32,7 @@ node {
     stage('Build Docker Image') {
       // build docker image
       //dockerImage = docker.build("devopsexample:${env.BUILD_NUMBER}")
-      sh "docker build -t devopsexample:${env.BUILD_NUMBER}"
+      sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
     }
    
     stage('Deploy Docker Image'){
