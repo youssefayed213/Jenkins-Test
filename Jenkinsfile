@@ -24,15 +24,18 @@ node {
       sh "'${mvnHome}/bin/mvn' -B -DskipTests clean package"
     }
 	
-    stage('Initialize Docker'){         
-	    def dockerHome = tool 'MyDocker'         
-	    env.PATH = "${dockerHome}/bin:${env.PATH}"     
-    } 
+    //stage('Initialize Docker'){         
+	//def dockerHome = tool 'MyDocker'         
+	  //env.PATH = "${dockerHome}/bin:${env.PATH}"     
+    //} 
 		
     stage('Build Docker Image') {
       // build docker image
       //dockerImage = docker.build("devopsexample:${env.BUILD_NUMBER}")
-      sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
+      def dockerHome = tool 'MyDocker'         
+	  env.PATH = "${dockerHome}/bin:${env.PATH}"
+      sh "'env.PATH' docker build -t devopsexample:${env.BUILD_NUMBER}"
+      //sh "docker build -t devopsexample:${env.BUILD_NUMBER}"
     }
    
     stage('Deploy Docker Image'){
