@@ -6,7 +6,6 @@
 
 #EXPOSE 2222
 FROM openjdk:8-jdk-alpine
-VOLUME /tmp
 COPY target/demo-0.0.1-SNAPSHOT.jar /demo.jar
 RUN curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz \
 && tar xzvf docker-17.04.0-ce.tgz \  
