@@ -7,5 +7,5 @@
 #EXPOSE 2222
 FROM openjdk:8-jdk-alpine
 COPY target/demo-0.0.1-SNAPSHOT.jar /demo.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+CMD ["java","-jar","/app.jar"]
 EXPOSE 2222
