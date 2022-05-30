@@ -34,7 +34,7 @@ node {
       //dockerImage = docker.build("devopsexample:${env.BUILD_NUMBER}")
 	def dockerHome = tool 'MyDocker'         
 	env.PATH = "${dockerHome}/bin:${env.PATH}"  
-	sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
+	sh "'${env.PATH}' docker build -t devopsexample:${env.BUILD_NUMBER} ."
     }
    
     stage('Deploy Docker Image'){
