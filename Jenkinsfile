@@ -31,10 +31,10 @@ node {
 		
     stage('Build Docker Image') {
       // build docker image
-      //dockerImage = docker.build("devopsexample:${env.BUILD_NUMBER}")
-	def dockerHome = tool 'MyDocker'         
-	env.PATH = "${dockerHome}/bin:${env.PATH}"  
-	sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
+      dockerImage = docker.build("devopsexample:${env.BUILD_NUMBER}")
+	//def dockerHome = tool 'MyDocker'         
+	//env.PATH = "${dockerHome}/bin:${env.PATH}"  
+	//sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
     }
    
     stage('Deploy Docker Image'){
