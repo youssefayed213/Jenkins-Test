@@ -28,20 +28,19 @@ node {
 	def dockerHome = tool 'MyDocker'         
 	  env.PATH = "${dockerHome}/bin:${env.PATH}"     
     } */
-		
-    stages{
-	agent {
+    stage('Build Docker Image') {
+	 agent {
 	    docker {
 		dockerfile true
 		label 'docker'
 	    }
 	}
-	stage('Build Docker Image') {
-	      // build docker image
-	      dockerImage = docker.build("devopsexample:${env.BUILD_NUMBER}")
-		//def dockerHome = tool 'MyDocker'         
-		//env.PATH = "${dockerHome}/bin:${env.PATH}"  
-		//sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
+	steps{
+		// build docker image
+		dockerImage = docker.build("devopsexample:${env.BUILD_NUMBER}")
+			//def dockerHome = tool 'MyDocker'         
+			//env.PATH = "${dockerHome}/bin:${env.PATH}"  
+			//sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
 	}
     }
    
