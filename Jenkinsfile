@@ -11,7 +11,7 @@ node {
       sh "'${mvnHome}/bin/mvn' -B -DskipTests clean package"
     }
     stage('Build Docker Image') {
-      dockerImage = docker.build("devopsexample:${env.BUILD_NUMBER}")
+      sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
     }
    
     stage('Deploy Docker Image'){
