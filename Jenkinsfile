@@ -10,7 +10,12 @@ node {
     stage('Build Project') {
       sh "'${mvnHome}/bin/mvn' -B -DskipTests clean package"
     }
-
+    
+    stage('Initialize Docker'){         
+	  def dockerHome = tool 'MyDocker'         
+	  env.PATH = "${dockerHome}/bin:${env.PATH}"     
+    }
+    
     stage('Build Docker Image') {
        sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
     }
