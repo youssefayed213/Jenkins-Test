@@ -16,12 +16,6 @@ pipeline{
             }
         }
         stage('Build Docker Image') {
-            agent {
-                docker {
-                    dockerfile true
-                    label 'docker'
-                }
-            }
             steps{
                 sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
             }
