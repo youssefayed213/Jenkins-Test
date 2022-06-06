@@ -17,7 +17,7 @@ pipeline{
         }
         stage('Build Docker Image') {
             steps{
-                sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
+                sh "'${mvnHome}/bin/mvn' mvn dockerfile:build"
             }
         }
     
