@@ -20,7 +20,7 @@ node {
   
     stage('Build Project') {
       // build project via maven
-      sh "'${mvnHome}/bin/mvn' clean install"
+      sh "'${mvnHome}/bin/mvn' -B -DskipTests clean package"
     }
 		
     stage('Build Docker Image') {
