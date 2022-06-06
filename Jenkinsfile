@@ -23,7 +23,7 @@ pipeline{
                 }
             }
             steps{
-                dockerImage = docker.build("devopsexample:${env.BUILD_NUMBER}")
+                sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
             }
         }
     
