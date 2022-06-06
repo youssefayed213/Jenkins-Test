@@ -16,6 +16,9 @@ pipeline{
             }
         }
         stage('Build Docker Image') {
+            environment{
+                mvnHome = tool 'maven-3.5.2'
+            }
             steps{
                 sh "'${mvnHome}/bin/mvn' mvn dockerfile:build"
             }
