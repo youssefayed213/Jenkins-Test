@@ -12,10 +12,7 @@ node {
     }
 
     stage('Build Docker Image') {
-      agent any
-      steps {
-        sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
-      }
+       sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
     }
     
     stage('Deploy Docker Image'){
