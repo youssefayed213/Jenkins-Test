@@ -16,15 +16,15 @@ node {
 	  env.PATH = "${dockerHome}/bin:${env.PATH}"     
     }
     
-    stage('Build Docker Image') {
-       sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
-    }
+    //stage('Build Docker Image') {
+      // sh "docker build -t devopsexample:${env.BUILD_NUMBER} ."
+    //}
     
-    stage('Deploy Docker Image'){
-    //stage('Build Docker Image'){
+    //stage('Deploy Docker Image'){
+    stage('Build and Run Docker Image'){
       echo "Docker Image Tag Name: ${dockerImageTag}"
-      sh "docker run --name devopsexample -d -p 2222:2222 devopsexample:${env.BUILD_NUMBER}"
-      //sh "docker run --name devopsexample -d -p 2222:2222 -v /var/run/docker.sock:/var/run/docker.sock devopsexample:${env.BUILD_NUMBER}"
+      //sh "docker run --name devopsexample -d -p 2222:2222 devopsexample:${env.BUILD_NUMBER}"
+      sh "docker run --name devopsexample -d -p 2222:2222 -v /var/run/docker.sock:/var/run/docker.sock devopsexample:${env.BUILD_NUMBER}"
         
     }
 }
